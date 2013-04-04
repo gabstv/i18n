@@ -19,7 +19,6 @@ const (
 
 var (
 	languageCode string //en
-	LanguageName string //English
 	objects      map[string]*PoFile
 )
 
