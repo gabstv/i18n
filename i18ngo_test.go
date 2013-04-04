@@ -8,7 +8,6 @@ import (
 
 func TestMultiple(t *testing.T) {
 	user := "i18n"
-	objects = make(map[string]*PoFile)
 	// English
 	LoadPoStr("msgid \"\"\nmsgstr \"\"\n\"Content-Type: text/plain; charset=utf-8\\n\"\n\"Content-Transfer-Encoding: 8bit\\n\"\n\"Language-Code: en\\n\"\n\"Language-Name: English\\n\"\n\n# THIS COMMENT SHOULD BE IGNORED.\nmsgid \"Hello, %s!\"\nmsgstr \"Hello, %s!\"\n")
 	// Portuguese
