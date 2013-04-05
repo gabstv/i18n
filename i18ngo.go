@@ -39,6 +39,13 @@ func GetLanguageCodes() []string {
 	return output
 }
 
+func GetDefaultLanguageCode() string {
+	if len(languageCode) < 1 {
+		languageCode = "en"
+	}
+	return languageCode
+}
+
 func LoadPoAll(path string) error {
 	var fil *PoFile
 	var err error
