@@ -26,6 +26,19 @@ func SetLanguageCode(lc string) {
 	languageCode = lc
 }
 
+func GetLanguageCodes() []string {
+	if objects == nil {
+		return nil
+	}
+	output := make([]string, len(objects))
+	i := 0
+	for k, _ := range objects {
+		output[i] = k
+		i++
+	}
+	return output
+}
+
 func LoadPoAll(path string) error {
 	var fil *PoFile
 	var err error
