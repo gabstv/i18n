@@ -22,6 +22,12 @@ var (
 	objects      map[string]*PoFile
 )
 
+func setup() {
+	if objects == nil {
+		objects = make(map[string]*PoFile)
+	}
+}
+
 func SetLanguageCode(lc string) {
 	languageCode = lc
 }
@@ -49,14 +55,12 @@ func GetDefaultLanguageCode() string {
 func LoadPoAll(path string) error {
 	var fil *PoFile
 	var err error
+	setup()
 	vPath := func(path string, f os.FileInfo, err error) error {
 		if strings.LastIndex(path, ".po") == len(path)-3 {
 			fil, err = ParsePoFile(path)
 			if fil != nil {
 				if len(fil.LangCode) > 0 {
-					if objects == nil {
-						objects = make(map[string]*PoFile, 0)
-					}
 					objects[fil.LangCode] = fil
 				}
 			}
@@ -69,24 +73,20 @@ func LoadPoAll(path string) error {
 }
 
 func LoadPoFile(filename string) error {
+	setup()
 	pofile, err := ParsePoFile(filename)
 	if err != nil {
 		return err
-	}
-	if objects == nil {
-		objects = make(map[string]*PoFile, 0)
 	}
 	objects[pofile.LangCode] = pofile
 	return nil
 }
 
 func LoadPoStr(contents string) error {
+	setup()
 	pofile, err := ParsePoStr(contents)
 	if err != nil {
 		return err
-	}
-	if objects == nil {
-		objects = make(map[string]*PoFile, 0)
 	}
 	objects[pofile.LangCode] = pofile
 	return nil
@@ -186,6 +186,7 @@ func parsePo(bbytes []byte) (*PoFile, error) {
 }
 
 func T(format string, a ...interface{}) string {
+	setup()
 	if len(languageCode) < 1 {
 		return fmt.Sprintf(format, a...)
 	}
@@ -201,6 +202,7 @@ func T(format string, a ...interface{}) string {
 }
 
 func TL(langcode string, format string, a ...interface{}) string {
+	setup()
 	lang, ok := objects[langcode]
 	if !ok {
 		return fmt.Sprintf(format, a...)
