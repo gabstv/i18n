@@ -7,6 +7,11 @@ import (
 )
 
 func TestMultiple(t *testing.T) {
+	// Test no Lang
+	t0 := TL("es", "UNDEFINED")
+	if t0 != "UNDEFINED" {
+		t.Errorf("Setup failed!")
+	}
 	user := "i18n"
 	// English
 	LoadPoStr("msgid \"\"\nmsgstr \"\"\n\"Content-Type: text/plain; charset=utf-8\\n\"\n\"Content-Transfer-Encoding: 8bit\\n\"\n\"Language-Code: en\\n\"\n\"Language-Name: English\\n\"\n\n# THIS COMMENT SHOULD BE IGNORED.\nmsgid \"Hello, %s!\"\nmsgstr \"Hello, %s!\"\n")
