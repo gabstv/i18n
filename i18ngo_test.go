@@ -1,4 +1,4 @@
-package i18ngo
+package i18n
 
 import (
 	"fmt"
