@@ -23,11 +23,26 @@ msgstr ""
 #. Default: "Comment here"
 #: ./etc/a/file.ext:55
 msgid "description_content_here"
-msgstr ""
+msgstr "hello, %v"
 
 # msg with context
 #: ./skins/archetypesmultilingual/at_babel_edit.cpt:95
 msgctxt "context_a"
 msgid "some key"
 msgstr "some value"
+```
+
+```Go
+import (
+	"github.com/gabstv/i18n/po/poutil"	
+)
+
+func main(){
+	provider, err := poutil.LoadAll("path/to/root/translations/dir", "en")
+	if err := nil {
+		panic(err)
+	}
+	print(provider.L("en").T("description_content_here", "world") + "\n")
+	print(provider.L("en").Ctx("context_a")("some key") + "\n")
+}
 ```
