@@ -26,6 +26,16 @@ func (p *provider) L(code string) i18n.Language {
 	return nil
 }
 
+func (p *provider) LanguageCodes() []string {
+	lc := make([]string, len(p.langs))
+	i := -1
+	for k, _ := range p.langs {
+		i++
+		lc[i] = k
+	}
+	return lc
+}
+
 type lnguage struct {
 	metadata po.Meta
 	entries  map[string]string

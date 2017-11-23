@@ -8,4 +8,5 @@ type Language interface {
 
 type Provider interface {
 	L(code string) Language
+	LanguageCodes() []string
 }
